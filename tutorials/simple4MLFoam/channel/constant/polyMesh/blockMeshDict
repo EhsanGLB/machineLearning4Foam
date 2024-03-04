@@ -1,0 +1,126 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     4.1                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//------------------------------- nanoFluid4Foam project -------------------------------//
+//Author
+    //Ehsan Golab, SUT. All rights reserved.
+    //Ehsan1996Golab@gmail.com
+
+//--------------------------------------------------------------------------------------//
+
+//Run using:
+//m4 -P blockMeshDict.m4 > blockMeshDict
+
+//m4 definitions:
+
+
+
+
+
+
+
+
+
+//variables
+
+
+
+
+
+
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+convertToMeters 0.001;
+
+vertices
+(
+    //-Back
+    (    0.0    0.0    -50    ) // Vertex B0 = 0 
+    (    500    0.0    -50    ) // Vertex B1 = 1 
+    (    500    100    -50    ) // Vertex B2 = 2 
+    (    0.0    100    -50    ) // Vertex B3 = 3 
+
+    //-Front
+    (    0.0    0.0    50    ) // Vertex F0 = 4 
+    (    500    0.0    50    ) // Vertex F1 = 5 
+    (    500    100    50    ) // Vertex F2 = 6 
+    (    0.0    100    50    ) // Vertex F3 = 7 
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (20 100 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type wall;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+
+    outlet
+    {
+        type wall;
+        faces
+        (
+            (1 2 6 5)
+        );
+    }
+
+    upperWall
+    {
+        type wall;
+        faces
+        (
+            (3 7 6 2)
+        );
+    }
+
+    lowerWall
+    {
+        type wall;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }
+
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

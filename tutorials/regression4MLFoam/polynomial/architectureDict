@@ -1,0 +1,141 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     4.1                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      architectureDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//**********************************# ANN Design #************************************//
+
+
+//for f = 3*x + 2 + noise
+hiddenLayerNumber		1;
+neuronNumber			4;
+
+
+/*
+//for f = (x-1)^2
+hiddenLayerNumber		2;
+neuronNumber			5;
+*/
+
+//******************************# Normalization Model #********************************//
+inputNormalizationModel		minMax;//minMax, zScore
+inputNormalizationModelDict
+{
+    minMaxCoeffs
+    {
+        a		0.0;
+        b		1.0;
+    }
+}
+
+
+outputNormalizationModel	minMax;
+outputNormalizationModelDict
+{
+    minMaxCoeffs
+    {
+        a		0.0;
+        b		1.0;
+    }
+}
+
+
+//**********************# Initialization Model for Weights #********************************//
+weightInitializationModel	random;//gaussian, random
+gaussianCoeffs
+{
+    mu			0.0;
+    C			-0.5;
+}
+
+randomCoeffs
+{
+    a			-1.0;
+    b			 1.0;
+}
+
+
+//************************# Activation Function Model #********************************//
+activationFunctionModel		ReLU;//sigmoid, linear, ReLU, tanh
+sigmoidCoeffs
+{
+    A			0.0;
+    B			1.0;
+    C			1.0;
+    D			1.0;
+    E			-1.0;
+    F			0.0;
+}
+
+linearCoeffs
+{
+    A			1.0;
+    B			0.0;
+}
+
+ReLUCoeffs
+{
+    A			1.0;
+}
+
+tanhCoeffs
+{
+    A			1.0;
+    B			1.0;
+    C			0.0;
+}
+
+
+//************************# Cost Function Model #********************************//
+costFunctionModel		R2;
+
+
+//************************# Learning Rate Model #********************************//
+learningRateModel		constant;//constant, adaGrad, RMSProp, Adam, adaDelta
+constantCoeffs
+{
+    eta			0.02;
+}
+
+adaGradCoeffs
+{
+    eta			0.5;
+    epsilon		1e-9;
+}
+
+
+//***************# Convergence and Statistical Metrics #********************************//
+convergence			1e-4;
+//batchSize			4;
+//epochNumber			1000;
+
+
+statisticalMetrics
+{
+    MAE			yes;
+    MSE			yes;
+    RMSD		yes;
+    R2			yes;
+}
+
+
+//************************# Data Generation #********************************//
+/*datasetGeneration
+(
+//(min max number)
+(0.0 1.0 51)//input1
+);*/
+
+
+// ************************************************************************* //
