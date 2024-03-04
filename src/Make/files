@@ -1,0 +1,37 @@
+
+
+dataset/dataset.C
+
+normalizationModelsDir = normalizationModels
+$(normalizationModelsDir)/normalizationModel/normalizationModel.C
+$(normalizationModelsDir)/normalizationModel/newNormalizationModel.C
+$(normalizationModelsDir)/minMax/minMax.C
+
+
+activationFunctionModelsDir = activationFunctionModels
+$(activationFunctionModelsDir)/activationFunctionModel/activationFunctionModel.C
+$(activationFunctionModelsDir)/activationFunctionModel/newActivationFunctionModel.C
+$(activationFunctionModelsDir)/sigmoid/sigmoid.C
+$(activationFunctionModelsDir)/tanh/tanh.C
+$(activationFunctionModelsDir)/linear/linear.C
+$(activationFunctionModelsDir)/ReLU/ReLU.C
+
+
+costFunctionModelsDir = costFunctionModels
+$(costFunctionModelsDir)/costFunctionModel/costFunctionModel.C
+$(costFunctionModelsDir)/costFunctionModel/newCostFunctionModel.C
+$(costFunctionModelsDir)/R2/R2.C
+
+
+learningRateModelsDir = learningRateModels
+$(learningRateModelsDir)/learningRateModel/learningRateModel.C
+$(learningRateModelsDir)/learningRateModel/newLearningRateModel.C
+$(learningRateModelsDir)/constant/constant.C
+$(learningRateModelsDir)/adaGrad/adaGrad.C
+
+artificialNeuralNetwork/artificialNeuralNetwork.C
+
+transportModels/incompressible/viscosityModels/ML4Foam/ML4Foam.C
+
+
+LIB = $(FOAM_USER_LIBBIN)/libML4Foam
