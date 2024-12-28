@@ -8,6 +8,8 @@ set -x
     #Ehsan1996Golab@gmail.com
 
 #--------------------------------------------------------------------------------------#
+# activate permission
+find -type f -exec chmod 777 {} \;
 
 wmake libso src
 applications/Allwmake
